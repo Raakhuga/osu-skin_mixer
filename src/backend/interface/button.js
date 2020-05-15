@@ -1,44 +1,39 @@
-const Element = require('../base/element.js');
-const { join } = require('path');
-//const Base = require('../base/base.js');
+const Base = require('../base/base.js');
 
-class Button {
+class Button extends Base {
     
     // Given the list of names (string) of the files of a skin creates its button component.
     constructor() {
+        super();
         this._elems = {
-            'button-left.png': null, 
-            'button-middle.png': null, 
-            'button-right.png': null
+            'button-left': null, 
+            'button-middle': null, 
+            'button-right': null
         }
     }
 
-    fillWith(file, path) {
-        this._elems[file] = new Element(join(path, file), false);
-    }
-
     get left() {
-        return this._elems[left];
+        return this._elems['button-left'];
     }
 
     get middle() {
-        return this._elems[middle];
+        return this._elems['button-middle'];
     }
 
     get right() {
-        return this._elems[rigth];
+        return this._elems['button-rigth'];
     }
 
     set left(elem) {
-        this._elems[left] = elem;
+        this._elems['button-left'] = elem;
     }
 
     set middle(elem) {
-        this._elems[middle] = elem;
+        this._elems['button-middle'] = elem;
     }
 
     set right(elem) {
-        this._elems[right] = elem;
+        this._elems['button-right'] = elem;
     }
 }
 

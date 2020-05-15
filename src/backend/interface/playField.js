@@ -1,43 +1,104 @@
-const Element = require('../base/element.js');
-const { join } = require('path')
+const Base = require('../base/base.js');
+const CountDown = require('./countdown.js');
+const HitBursts = require('./hitBursts.js');
+const InputOverlay = require('./inputOverlay.js');
+const PauseScreen = require('./pauseScreen.js');
+const ScoreBar = require('./scoreBar.js');
+const ScoreNumbers = require('./scoreNumbers.js');
 
-class PlayField {
+class PlayField extends Base {
     constructor() {
+        super();
+        this._countDown = new CountDown();
+        this._hitBursts = new HitBursts();
+        this._inputOverlay = new InputOverlay();
+        this._pauseScreen = new PauseScreen();
+        this._scoreBar = new ScoreBar();
+        this._scoreNumbers = new ScoreNumbers();
         this._elems = {
-            'play-skip.png': null,
-            'play-unranked.png': null,
-            'play-warningarrow.png': null,
-            'arrow-pause.png': null,
-            'arrow-warning.png': null,
-            'masking-border.png': null,
-            'multi-skipped.png': null,
-            'section-fail.png': null,
-            'section-pass.png': null
+            'play-skip': null,
+            'play-unranked': null,
+            'play-warningarrow': null,
+            'arrow-pause': null,
+            'arrow-warning': null,
+            'masking-border': null,
+            'multi-skipped': null,
+            'section-fail': null,
+            'section-pass': null
         };
     }
+    
+    get playSkip() {
+        return this._elems['play-skip'];
+    }
 
-    fillWith(file, path) {
-        this._elems[file] = new Element(join(path, file), false);
+    set playSkip(component) {
+        this._elems['play-skip'] = component;
+    }
+
+    get playUnranked() {
+        return this._elems['play-unranked'];
+    }
+
+    set playUnranked(component) {
+        this._elems['play-unranked'] = component;
+    }
+
+    get playWarningArrow() {
+        return this._elems['play-warningarrow'];
+    }
+
+    set playWarningArrow(component) {
+        this._elems['play-warningarrow'] = component;
+    }
+
+    get arrowPause() {
+        return this._elems['arrow-pause'];
+    }
+
+    set arrowPause(component) {
+        this._elems['arrow-pause'] = component;
+    }
+
+    get arrowWarning() {
+        return this._elems['arrow-warning'];
+    }
+
+    set arrowWarning(component) {
+        this._elems['arrow-warning'] = component;
+    }
+
+    get maskingBorder() {
+        return this._elems['masking-border'];
+    }
+
+    set maskingBorder(component) {
+        this._elems['masking-border'] = component;
+    }
+
+    get multiSkipped() {
+        return this._elems['multi-skipped'];
+    }
+
+    set multiSkipped(component) {
+        this._elems['multi-skipped'] = component;
+    }
+
+    get sectionFail() {
+        return this._elems['section-fail'];
+    }
+
+    set sectionFail(component) {
+        this._elems['section-fail'] = component;
+    }
+
+    get sectionPass() {
+        return this._elems['section-pass'];
+    }
+
+    set sectionPass(component) {
+        this._elems['section-pass'] = component;
     }
 }
 
 module.exports = PlayField;
-
-'count1.png': null,
-            'count2.png': null,
-            'count3.png': null,
-            'go.png': null,
-            'ready.png': null,
-            'hit0.png': null,
-            'hit50.png': null,
-            'hit100.png': null,
-            'hit100k.png': null,
-            'hit300.png': null,
-            'hit300g.png': null,
-            'hit300k.png': null,
-            'inputoverlay-background.png': null,
-            'inputoverlay-key.png': null,
-            'inputoverlay-key.png': null,
-            'inputoverlay-key.png': null,
-            'inputoverlay-key.png': null,
-            'inputoverlay-key.png': null,

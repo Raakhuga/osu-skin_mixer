@@ -1,18 +1,46 @@
-const Element = require('../base/element.js');
-const { join } = require('path')
+const Base = require('../base/base.js');
 
-class Cursor {
+class Cursor extends Base {
     constructor() {
+        super();
         this._elems = {
-            'cursor.png': null,
-            'cursormiddle.png': null,
-            'cursor-smoke.png': null,
-            'cursortrail.png': null
+            'cursor': null,
+            'cursormiddle': null,
+            'cursor-smoke': null,
+            'cursortrail': null
         };
     }
 
-    fillWith(file, path) {
-        this._elems[file] = new Element(join(path, file), false);
+    get cursor() {
+        return this._elems['cursor'];
+    }
+
+    set cursor(component) {
+        this._elems['cursor'] = component;
+    }
+
+    get cursormiddle() {
+        return this._elems['cursormiddle'];
+    }
+
+    set cursormiddle(component) {
+        this._elems['cursormiddle'] = component;
+    }
+
+    get cursorSmoke() {
+        return this._elems['cursor-smoke'];
+    }
+
+    set cursorSmoke(component) {
+        this._elems['cursor-smoke'] = component;
+    }
+
+    get cursortrail() {
+        return this._elems['cursortrail'];
+    }
+
+    set cursortrail(component) {
+        this._elems['cursortrail'] = component;
     }
 }
 

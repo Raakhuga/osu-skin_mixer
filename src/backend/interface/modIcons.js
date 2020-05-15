@@ -1,107 +1,266 @@
-const Element = require('../base/element.js');
-const { join } = require('path')
+const Base = require('../base/base.js');
 
-class ModIcons {
+class ModIcons extends Base {
     constructor() {
+        super();
         this._elems = {
-            'selection-mod-autoplay.png': null,
-            'selection-mod-cinema.png': null,
-            'selection-mod-doubletime.png': null,
-            'selection-mod-easy.png': null,
-            'selection-mod-fadein.png': null,
-            'selection-mod-flashlight.png': null,
-            'selection-mod-halftime.png': null,
-            'selection-mod-hardrock.png': null,
+            'selection-mod-autoplay': null,
+            'selection-mod-cinema': null,
+            'selection-mod-doubletime': null,
+            'selection-mod-easy': null,
+            'selection-mod-fadein': null,
+            'selection-mod-flashlight': null,
+            'selection-mod-halftime': null,
+            'selection-mod-hardrock': null,
             'selection-mod-hidden': null,
-            'selection-mod-key1.png': null,
-            'selection-mod-key2.png': null,
-            'selection-mod-key3.png': null,
-            'selection-mod-key4.png': null,
-            'selection-mod-key5.png': null,
-            'selection-mod-key6.png': null,
-            'selection-mod-key7.png': null,
-            'selection-mod-key8.png': null,
-            'selection-mod-key9.png': null,
-            'selection-mod-keycoop.png': null,
-            'selection-mod-mirror.png': null,
-            'selection-mod-nightcore.png': null,
-            'selection-mod-nofail.png': null,
-            'selection-mod-perfect.png': null,
-            'selection-mod-random.png': null,
-            'selection-mod-relax.png': null,
-            'selection-mod-relax2.png': null,
-            'selection-mod-spunout.png': null,
-            'selection-mod-suddendeath.png': null,
-            'selection-mod-target.png': null
+            'selection-mod-key1': null,
+            'selection-mod-key2': null,
+            'selection-mod-key3': null,
+            'selection-mod-key4': null,
+            'selection-mod-key5': null,
+            'selection-mod-key6': null,
+            'selection-mod-key7': null,
+            'selection-mod-key8': null,
+            'selection-mod-key9': null,
+            'selection-mod-keycoop': null,
+            'selection-mod-mirror': null,
+            'selection-mod-nightcore': null,
+            'selection-mod-nofail': null,
+            'selection-mod-perfect': null,
+            'selection-mod-random': null,
+            'selection-mod-relax': null,
+            'selection-mod-relax2': null,
+            'selection-mod-spunout': null,
+            'selection-mod-suddendeath': null,
+            'selection-mod-target': null
         };
     }
 
-    fillWith(file, path) {
-        this._elems[file] = new Element(join(path, file), false);
+    get autoplay() {
+        return this._elems['selection-mod-autoplay'];
     }
 
-    /*
-    fillWith(file, path) {
-        if (file == 'selection-mod-autoplay.png') {
-            this._autoPlay = new Element(join(path, 'selection-mod-autoplay.png'), false);
-        } else if (file == 'selection-mod-cinema.png') {
-            this._cinema = new Element(join(path, 'selection-mod-cinema.png'), false);
-        } else if (file == 'selection-mod-doubletime.png') {
-            this._doubleTime = new Element(join(path, 'selection-mod-doubletime.png'), false);
-        } else if (file == 'selection-mod-easy.png') {
-            this._easy = new Element(join(path, 'selection-mod-easy.png'), false);
-        } else if (file == 'selection-mod-fadein.png') {
-            this._fadeIn = new Element(join(path, 'selection-mod-fadein.png'), false);
-        } else if (file == 'selection-mod-flashlight.png') {
-            this._flashlight = new Element(join(path, 'selection-mod-flashlight.png'), false);
-        } else if (file == 'selection-mod-halftime.png') {
-            this._halftime = new Element(join(path, 'selection-mod-halftime.png'), false);
-        } else if (file == 'selection-mod-hardrock.png') {
-            this._hardRock = new Element(join(path, 'selection-mod-hardrock.png'), false);
-        } else if (file == 'selection-mod-hidden.png') {
-            this._hidden = new Element(join(path, 'selection-mod-hidden.png'), false);
-        } else if (file == 'selection-mod-key1.png') {
-            this._key1 = new Element(join(path, 'selection-mod-key1.png'), false);
-        } else if (file == 'selection-mod-key2.png') {
-            this._key2 = new Element(join(path, 'selection-mod-key2.png'), false);
-        } else if (file == 'selection-mod-key3.png') {
-            this._key3 = new Element(join(path, 'selection-mod-key3.png'), false);
-        } else if (file == 'selection-mod-key4.png') {
-            this._key4 = new Element(join(path, 'selection-mod-key4.png'), false);
-        } else if (file == 'selection-mod-key5.png') {
-            this._key5 = new Element(join(path, 'selection-mod-key5.png'), false);
-        } else if (file == 'selection-mod-key6.png') {
-            this._key6 = new Element(join(path, 'selection-mod-key6.png'), false);
-        } else if (file == 'selection-mod-key7.png') {
-            this._key7 = new Element(join(path, 'selection-mod-key7.png'), false);
-        } else if (file == 'selection-mod-key8.png') {
-            this._key8 = new Element(join(path, 'selection-mod-key8.png'), false);
-        } else if (file == 'selection-mod-key9.png') {
-            this._key9 = new Element(join(path, 'selection-mod-key9.png'), false);
-        } else if (file == 'selection-mod-keycoop.png') {
-            this._keyCoop = new Element(join(path, 'selection-mod-keycoop.png'), false);
-        } else if (file == 'selection-mod-mirror.png') {
-            this._mirror = new Element(join(path, 'selection-mod-mirror.png'), false);
-        } else if (file == 'selection-mod-nightcore.png') {
-            this._nightcore = new Element(join(path, 'selection-mod-nightcore.png'), false);
-        } else if (file == 'selection-mod-nofail.png') {
-            this._noFail = new Element(join(path, 'selection-mod-nofail.png'), false);
-        } else if (file == 'selection-mod-perfect.png') {
-            this._perfect = new Element(join(path, 'selection-mod-perfect.png'), false);
-        } else if (file == 'selection-mod-random.png') {
-            this._random = new Element(join(path, 'selection-mod-random.png'), false);
-        } else if (file == 'selection-mod-relax.png') {
-            this._relax = new Element(join(path, 'selection-mod-relax.png'), false);
-        } else if (file == 'selection-mod-relax2.png') {
-            this._relax2 = new Element(join(path, 'selection-mod-relax2.png'), false);
-        } else if (file == 'selection-mod-spunout.png') {
-            this._spunOut = new Element(join(path, 'selection-mod-spunout.png'), false);
-        } else if (file == 'selection-mod-suddendeath.png') {
-            this._suddenDeath = new Element(join(path, 'selection-mod-suddendeath.png'), false);
-        } else if (file == 'selection-mod-target.png') {
-            this._target = new Element(join(path, 'selection-mod-target.png'), false);
-        }
-    }*/
+    set autoplay(component) {
+        this._elems['selection-mod-autoplay'] = component;
+    }
+
+    get cinema() {
+        return this._elems['selection-mod-cinema'];
+    }
+
+    set cinema(component) {
+        this._elems['selection-mod-cinema'] = component;
+    }
+
+    get doubletime() {
+        return this._elems['selection-mod-doubletime'];
+    }
+
+    set doubletime(component) {
+        this._elems['selection-mod-doubletime'] = component;
+    }
+
+    get easy() {
+        return this._elems['selection-mod-easy'];
+    }
+
+    set easy(component) {
+        this._elems['selection-mod-easy'] = component;
+    }
+
+    get fadein() {
+        return this._elems['selection-mod-fadein'];
+    }
+
+    set fadein(component) {
+        this._elems['selection-mod-fadein'] = component;
+    }
+
+    get flashlight() {
+        return this._elems['selection-mod-flashlight'];
+    }
+
+    set flashlight(component) {
+        this._elems['selection-mod-flashlight'] = component;
+    }
+
+    get halftime() {
+        return this._elems['selection-mod-halftime'];
+    }
+
+    set halftime(component) {
+        this._elems['selection-mod-halftime'] = component;
+    }
+
+    get hardrock() {
+        return this._elems['selection-mod-hardrock'];
+    }
+
+    set hardrock(component) {
+        this._elems['selection-mod-hardrock'] = component;
+    }
+
+    get key1() {
+        return this._elems['selection-mod-key1'];
+    }
+
+    set key1(component) {
+        this._elems['selection-mod-key1'] = component;
+    }
+
+    get key2() {
+        return this._elems['selection-mod-key2'];
+    }
+
+    set key2(component) {
+        this._elems['selection-mod-key2'] = component;
+    }
+
+    get key3() {
+        return this._elems['selection-mod-key3'];
+    }
+
+    set key3(component) {
+        this._elems['selection-mod-key3'] = component;
+    }
+
+    get key4() {
+        return this._elems['selection-mod-key4'];
+    }
+
+    set key4(component) {
+        this._elems['selection-mod-key4'] = component;
+    }
+
+    get key5() {
+        return this._elems['selection-mod-key5'];
+    }
+
+    set key5(component) {
+        this._elems['selection-mod-key5'] = component;
+    }
+
+    get key6() {
+        return this._elems['selection-mod-key6'];
+    }
+
+    set key6(component) {
+        this._elems['selection-mod-key6'] = component;
+    }
+
+    get key7() {
+        return this._elems['selection-mod-key7'];
+    }
+
+    set key7(component) {
+        this._elems['selection-mod-key7'] = component;
+    }
+
+    get key8() {
+        return this._elems['selection-mod-key8'];
+    }
+
+    set key8(component) {
+        this._elems['selection-mod-key8'] = component;
+    }
+
+    get key9() {
+        return this._elems['selection-mod-key9'];
+    }
+
+    set key9(component) {
+        this._elems['selection-mod-key9'] = component;
+    }
+
+    get keycoop() {
+        return this._elems['selection-mod-keycoop'];
+    }
+
+    set keycoop(component) {
+        this._elems['selection-mod-keycoop'] = component;
+    }
+
+    get mirror() {
+        return this._elems['selection-mod-mirror'];
+    }
+
+    set mirror(component) {
+        this._elems['selection-mod-mirror'] = component;
+    }
+
+    get nightcore() {
+        return this._elems['selection-mod-nightcore'];
+    }
+
+    set nightcore(component) {
+        this._elems['selection-mod-nightcore'] = component;
+    }
+
+    get nofail() {
+        return this._elems['selection-mod-nofail'];
+    }
+
+    set nofail(component) {
+        this._elems['selection-mod-nofail'] = component;
+    }
+
+    get perfect() {
+        return this._elems['selection-mod-perfect'];
+    }
+
+    set perfect(component) {
+        this._elems['selection-mod-perfect'] = component;
+    }
+
+    get random() {
+        return this._elems['selection-mod-random'];
+    }
+
+    set random(component) {
+        this._elems['selection-mod-random'] = component;
+    }
+
+    get relax() {
+        return this._elems['selection-mod-relax'];
+    }
+
+    set relax(component) {
+        this._elems['selection-mod-relax'] = component;
+    }
+
+    get relax2() {
+        return this._elems['selection-mod-relax2'];
+    }
+
+    set relax2(component) {
+        this._elems['selection-mod-relax2'] = component;
+    }
+
+    get spunout() {
+        return this._elems['selection-mod-spunout'];
+    }
+
+    set spunout(component) {
+        this._elems['selection-mod-spunout'] = component;
+    }
+
+    get suddendeath() {
+        return this._elems['selection-mod-suddendeath'];
+    }
+
+    set suddendeath(component) {
+        this._elems['selection-mod-suddendeath'] = component;
+    }
+
+    get target() {
+        return this._elems['selection-mod-target'];
+    }
+
+    set target(component) {
+        this._elems['selection-mod-target'] = component;
+    }
+
+
 }
 
 module.exports = ModIcons;
