@@ -1,193 +1,233 @@
 const Interface = require('./interface.js');
+const fs = require('fs');
 
 class Skin {
-    constructor(path) {
+    constructor(path, files) {
         this._path = path;
-        const buttonFiles = [
-            'button-left.png', 
-            'button-middle.png', 
-            'button-right.png'
-        ];
-        const cursorFiles = [
-            'cursor.png',
-            'cursormiddle.png',
-            'cursor-smoke.png',
-            'cursortrail.png'
-        ];
-        const modFiles = [
-            'selection-mod-autoplay.png',
-            'selection-mod-cinema.png',
-            'selection-mod-doubletime.png',
-            'selection-mod-easy.png',
-            'selection-mod-fadein.png',
-            'selection-mod-flashlight.png',
-            'selection-mod-halftime.png',
-            'selection-mod-hardrock.png',
-            'selection-mod-hidden',
-            'selection-mod-key1.png',
-            'selection-mod-key2.png',
-            'selection-mod-key3.png',
-            'selection-mod-key4.png',
-            'selection-mod-key5.png',
-            'selection-mod-key6.png',
-            'selection-mod-key7.png',
-            'selection-mod-key8.png',
-            'selection-mod-key9.png',
-            'selection-mod-keycoop.png',
-            'selection-mod-mirror.png',
-            'selection-mod-nightcore.png',
-            'selection-mod-nofail.png',
-            'selection-mod-perfect.png',
-            'selection-mod-random.png',
-            'selection-mod-relax.png',
-            'selection-mod-relax2.png',
-            'selection-mod-spunout.png',
-            'selection-mod-suddendeath.png',
-            'selection-mod-target.png'
-        ];
-        const offsetWizardFiles = [
-            'options-offset-tick.png'
-        ];
-        const playFieldFiles = [
-            'play-skip.png',
-            'play-unranked.png',
-            'play-warningarrow.png',
-            'arrow-pause.png',
-            'arrow-warning.png',
-            'masking-border.png',
-            'multi-skipped.png',
-            'section-fail.png',
-            'section-pass.png'
-        ];
-        const countDownFiles = [
-            'count1.png',
-            'count2.png',
-            'count3.png',
-            'go.png',
-            'ready.png'
-        ];
-        const hitBurstsFiles = [
-            'hit0.png',
-            'hit50.png',
-            'hit100.png',
-            'hit100k.png',
-            'hit300.png',
-            'hit300g.png',
-            'hit300k.png'
-        ];
-        const inputOverlayFiles = [
-            'inputoverlay-background.png',
-            'inputoverlay-key.png'
-        ];
-        const pauseScreenFiles = [
-            'pause-overlay.png',
-            'fail-background.png',
-            'pause-back.png',
-            'pause-continue.png',
-            'pause-replay.png',
-            'pause-retry.png'
 
-        ];
-        const scoreBarFiles = [
-            'scorebar-bg.png',
-            'scorebar-colour.png',
-            'scorebar-ki.png',
-            'scorebar-kidanger.png',
-            'scorebar-kidanger2.png',
-            'scorebar-marker.png'
-        ];
-        const scoreNumbersFiles = [
-            'score-0.png',
-            'score-1.png',
-            'score-2.png',
-            'score-3.png',
-            'score-4.png',
-            'score-5.png',
-            'score-6.png',
-            'score-7.png',
-            'score-8.png',
-            'score-9.png',
-            'score-comma.png',
-            'score-dot.png',
-            'score-percent.png',
-            'score-x.png'
-        ];
-        const RankingGradesFiles = [
-            'ranking-XH.png',
-            'ranking-XH-small.png',
-            'ranking-X.png',
-            'ranking-X-small.png',
-            'ranking-SH.png',
-            'ranking-SH-small.png',
-            'ranking-S.png',
-            'ranking-S-small.png',
-            'ranking-A.png',
-            'ranking-A-small.png',
-            'ranking-B.png',
-            'ranking-B-small.png',
-            'ranking-C.png',
-            'ranking-C-small.png',
-            'ranking-D.png',
-            'ranking-D-small.png'
-        ];
-        const rankingScreenFiles = [
-            'ranking-accuracy.png',
-            'ranking-graph.png',
-            'ranking-maxcombo.png',
-            'ranking-panel.png',
-            'ranking-perfect.png',
-            'ranking-title.png',
-            'ranking-replay.png',
-            'ranking-retry.png',
-            'ranking-winner.png'
-        ];
-        const scoreEntryFiles = [
-            'scoreentry-0.png',
-            'scoreentry-1.png',
-            'scoreentry-2.png',
-            'scoreentry-3.png',
-            'scoreentry-4.png',
-            'scoreentry-5.png',
-            'scoreentry-6.png',
-            'scoreentry-7.png',
-            'scoreentry-8.png',
-            'scoreentry-9.png',
-            'scoreentry-comma.png',
-            'scoreentry-dot.png',
-            'scoreentry-percent.png',
-            'scoreentry-x.png'
-        ];
-        const songSelectionFiles = [
-            'menu-back.png',
-            'menu-button-background.png',
-            'selection-mode.png',
-            'selection-mode-over.png',
-            'selection-mods.png',
-            'selection-mods-over.png',
-            'selection-random.png',
-            'selection-random-over.png',
-            'selection-options.png',
-            'selection-options-over.png',
-            'selection-tab.png',
-            'star.png',
-            'star2.png'
-        ];
-        const modeSelectFiles = [
-            'mode-osu.png',
-            'mode-taiko.png',
-            'mode-fruits.png',
-            'mode-mania.png',
-            'mode-osu-med.png',
-            'mode-taiko-med.png',
-            'mode-fruits-med.png',
-            'mode-mania-med.png',
-            'mode-osu-small.png',
-            'mode-taiko-small.png',
-            'mode-fruits-small.png',
-            'mode-mania-small.png'
-        ];
+        this._buttonFiles = {};
+        this._cursorFiles = {};
+        this._modFiles = {};
+        this._offsetWizardFiles = {};
+        this._playFieldFiles = {};
+        this._countDownFiles = {};
+        this._hitBurstsFiles = {};
+        this._inputOverlayFiles = {};
+        this._pauseScreenFiles = {};
+        this._scoreBarFiles = {};
+        this._scoreNumbersFiles = {};
+        this._rankingGradesFiles = {};
+        this._rankingScreenFiles = {};
+        this._scoreEntryFiles = {};
+        this._songSelectionFiles = {};
+        this._modeSelectFiles = {};
 
+        this._skinFiles = {
+            'button-left': this._buttonFiles, 
+            'button-middle': this._buttonFiles, 
+            'button-right': this._buttonFiles,
+            'cursor': this._cursorFiles,
+            'cursormiddle': this._cursorFiles,
+            'cursor-smoke': this._cursorFiles,
+            'cursortrail': this._cursorFiles,
+            'selection-mod-autoplay': this._modFiles,
+            'selection-mod-cinema': this._modFiles,
+            'selection-mod-doubletime': this._modFiles,
+            'selection-mod-easy': this._modFiles,
+            'selection-mod-fadein': this._modFiles,
+            'selection-mod-flashlight': this._modFiles,
+            'selection-mod-halftime': this._modFiles,
+            'selection-mod-hardrock': this._modFiles,
+            'selection-mod-hidden': this._modFiles,
+            'selection-mod-key1': this._modFiles,
+            'selection-mod-key2': this._modFiles,
+            'selection-mod-key3': this._modFiles,
+            'selection-mod-key4': this._modFiles,
+            'selection-mod-key5': this._modFiles,
+            'selection-mod-key6': this._modFiles,
+            'selection-mod-key7': this._modFiles,
+            'selection-mod-key8': this._modFiles,
+            'selection-mod-key9': this._modFiles,
+            'selection-mod-keycoop': this._modFiles,
+            'selection-mod-mirror': this._modFiles,
+            'selection-mod-nightcore': this._modFiles,
+            'selection-mod-nofail': this._modFiles,
+            'selection-mod-perfect': this._modFiles,
+            'selection-mod-random': this._modFiles,
+            'selection-mod-relax': this._modFiles,
+            'selection-mod-relax2': this._modFiles,
+            'selection-mod-spunout': this._modFiles,
+            'selection-mod-suddendeath': this._modFiles,
+            'selection-mod-target': this._modFiles,
+            'options-offset-tick': this._offsetWizardFiles,
+            'play-skip': this._playFieldFiles,
+            'play-unranked': this._playFieldFiles,
+            'play-warningarrow': this._playFieldFiles,
+            'arrow-pause': this._playFieldFiles,
+            'arrow-warning': this._playFieldFiles,
+            'masking-border': this._playFieldFiles,
+            'multi-skipped': this._playFieldFiles,
+            'section-fail': this._playFieldFiles,
+            'section-pass': this._playFieldFiles,
+            'count1': this._countDownFiles,
+            'count2': this._countDownFiles,
+            'count3': this._countDownFiles,
+            'go': this._countDownFiles,
+            'ready': this._countDownFiles,
+            'hit0': this._hitBurstsFiles,
+            'hit50': this._hitBurstsFiles,
+            'hit100': this._hitBurstsFiles,
+            'hit100k': this._hitBurstsFiles,
+            'hit300': this._hitBurstsFiles,
+            'hit300g': this._hitBurstsFiles,
+            'hit300k': this._hitBurstsFiles,
+            'inputoverlay-background': this._inputOverlayFiles,
+            'inputoverlay-key': this._inputOverlayFiles,
+            'pause-overlay': this._pauseScreenFiles,
+            'fail-background': this._pauseScreenFiles,
+            'pause-back': this._pauseScreenFiles,
+            'pause-continue': this._pauseScreenFiles,
+            'pause-replay': this._pauseScreenFiles,
+            'pause-retry': this._pauseScreenFiles,
+            'scorebar-bg': this._scoreBarFiles,
+            'scorebar-colour': this._scoreBarFiles,
+            'scorebar-ki': this._scoreBarFiles,
+            'scorebar-kidanger': this._scoreBarFiles,
+            'scorebar-kidanger2': this._scoreBarFiles,
+            'scorebar-marker': this._scoreBarFiles,
+            'score-0': this._scoreNumbersFiles,
+            'score-1': this._scoreNumbersFiles,
+            'score-2': this._scoreNumbersFiles,
+            'score-3': this._scoreNumbersFiles,
+            'score-4': this._scoreNumbersFiles,
+            'score-5': this._scoreNumbersFiles,
+            'score-6': this._scoreNumbersFiles,
+            'score-7': this._scoreNumbersFiles,
+            'score-8': this._scoreNumbersFiles,
+            'score-9': this._scoreNumbersFiles,
+            'score-comma': this._scoreNumbersFiles,
+            'score-dot': this._scoreNumbersFiles,
+            'score-percent': this._scoreNumbersFiles,
+            'score-x': this._scoreNumbersFiles,
+            'ranking-XH': this._rankingGradesFiles,
+            'ranking-XH-small': this._rankingGradesFiles,
+            'ranking-X': this._rankingGradesFiles,
+            'ranking-X-small': this._rankingGradesFiles,
+            'ranking-SH': this._rankingGradesFiles,
+            'ranking-SH-small': this._rankingGradesFiles,
+            'ranking-S': this._rankingGradesFiles,
+            'ranking-S-small': this._rankingGradesFiles,
+            'ranking-A': this._rankingGradesFiles,
+            'ranking-A-small': this._rankingGradesFiles,
+            'ranking-B': this._rankingGradesFiles,
+            'ranking-B-small': this._rankingGradesFiles,
+            'ranking-C': this._rankingGradesFiles,
+            'ranking-C-small': this._rankingGradesFiles,
+            'ranking-D': this._rankingGradesFiles,
+            'ranking-D-small': this._rankingGradesFiles,
+            'ranking-accuracy': this._rankingScreenFiles,
+            'ranking-graph': this._rankingScreenFiles,
+            'ranking-maxcombo': this._rankingScreenFiles,
+            'ranking-panel': this._rankingScreenFiles,
+            'ranking-perfect': this._rankingScreenFiles,
+            'ranking-title': this._rankingScreenFiles,
+            'ranking-replay': this._rankingScreenFiles,
+            'ranking-retry': this._rankingScreenFiles,
+            'ranking-winner': this._rankingScreenFiles,
+            'scoreentry-0': this._scoreEntryFiles,
+            'scoreentry-1': this._scoreEntryFiles,
+            'scoreentry-2': this._scoreEntryFiles,
+            'scoreentry-3': this._scoreEntryFiles,
+            'scoreentry-4': this._scoreEntryFiles,
+            'scoreentry-5': this._scoreEntryFiles,
+            'scoreentry-6': this._scoreEntryFiles,
+            'scoreentry-7': this._scoreEntryFiles,
+            'scoreentry-8': this._scoreEntryFiles,
+            'scoreentry-9': this._scoreEntryFiles,
+            'scoreentry-comma': this._scoreEntryFiles,
+            'scoreentry-dot': this._scoreEntryFiles,
+            'scoreentry-percent': this._scoreEntryFiles,
+            'scoreentry-x': this._scoreEntryFiles,
+            'menu-back': this._songSelectionFiles,
+            'menu-button-background': this._songSelectionFiles,
+            'selection-mode': this._songSelectionFiles,
+            'selection-mode-over': this._songSelectionFiles,
+            'selection-mods': this._songSelectionFiles,
+            'selection-mods-over': this._songSelectionFiles,
+            'selection-random': this._songSelectionFiles,
+            'selection-random-over': this._songSelectionFiles,
+            'selection-options': this._songSelectionFiles,
+            'selection-options-over': this._songSelectionFiles,
+            'selection-tab': this._songSelectionFiles,
+            'star': this._songSelectionFiles,
+            'star2': this._songSelectionFiles,
+            'mode-osu': this._modeSelectFiles,
+            'mode-taiko': this._modeSelectFiles,
+            'mode-fruits': this._modeSelectFiles,
+            'mode-mania': this._modeSelectFiles,
+            'mode-osu-med': this._modeSelectFiles,
+            'mode-taiko-med': this._modeSelectFiles,
+            'mode-fruits-med': this._modeSelectFiles,
+            'mode-mania-med': this._modeSelectFiles,
+            'mode-osu-small': this._modeSelectFiles,
+            'mode-taiko-small': this._modeSelectFiles,
+            'mode-fruits-small': this._modeSelectFiles,
+            'mode-mania-small': this._modeSelectFiles
+        }
+
+        this._files = files;
         this._interface = new Interface();
+    }
+
+    fillComponents() {
+        let exceptions = ['scoreentry', 'score'];
+
+        this._files.map((file) => {
+            // Find key
+            // Delete extension
+            var aux = file.split('.');
+            aux.pop()
+            var key = aux.join('.');
+
+            // Delete @2x
+            var isX2 = false;
+            aux = key.split('@');
+            if (aux.length > 1) {
+                isX2 = true;
+                aux.pop();
+            }
+            key = aux.join('@');
+
+            // Delete -{num}
+            var auxKey = key;
+            aux = auxKey.split('-');
+            if (!isNaN (aux.pop())) {
+                auxKey = aux.join('-');
+                for (var i = 0; i < exceptions.length; i++) {
+                    if (exceptions[i] == auxKey) {
+                        auxKey = key;
+                        break;
+                    }
+                }
+            }
+            key = auxKey;
+
+            // Update array
+            if (key in this._skinFiles) {
+                if (key in this._skinFiles[key]) {
+                    if (isX2) this._skinFiles[key][key]['x2'].push(file);
+                    else this._skinFiles[key][key]['x1'].push(file);
+                }
+                else {
+                    if (isX2) this._skinFiles[key][key] = { 'x1': [], 'x2': [file] }
+                    else this._skinFiles[key][key] = { 'x1': [file], 'x2': [] }
+                }
+            } 
+                
+        });
+
+        // Interface files
+        this._interface.loadButton(this._buttonFiles, this._path);
     }
 }
 

@@ -1,8 +1,9 @@
 class Component {
-    constructor(path, sourceSkin, author) {
+    constructor(path, pathX2, sourceSkin, author) {
         this._sourceSkin = sourceSkin;
         this._author = author 
         this._path = path;
+        this._pathX2 = pathX2;
     }
 
     get path() {
@@ -11,6 +12,14 @@ class Component {
 
     set path(path) {
         this._path = path;
+    }
+
+    get pathX2() {
+        return this._pathX2;
+    }
+
+    set pathX2(pathX2) {
+        this._pathX2 = pathX2;
     }
 
     get author() {

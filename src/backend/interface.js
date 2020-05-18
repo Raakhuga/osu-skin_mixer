@@ -20,6 +20,24 @@ class Interface {
         this._scoreEntry = new ScoreEntry();
         this._songSelection = new songSelection();
     }
+
+
+    // Expects dictionary of type:
+    /*
+    {
+        'key': {
+            'x1': [],
+            'x2': []
+        }
+    }
+    */
+    loadButton(dict, path) { 
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._button.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._button.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        })
+    }
 }
 
 module.exports = Interface;

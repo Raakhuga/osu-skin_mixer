@@ -5,27 +5,21 @@ const { join } = require('path');
 class Base {
     constructor() {}
 
-    fillWith(file, path, sourceSkin, author) {
-        if (Array.isArray(file)) {
-            var components = [];
+    fillWith(key, file, path, sourceSkin, author, isX2 = false) {
+        var paths = [];
 
-            // get the name of the component erasing the '-{n}.extension' at the end of the file.
-            var componentName = file[0].split('-');
-            componentName.pop();
-            componentName = componentName.join('-');
+        // get the name of the component erasing the '-{n}.extension' at the end of the file.
+        file.map((f) => {
+            paths.push(join(path, f));    
+        });
 
-            file.map((f) => {
-                components.push(new Component(join(path, f), sourceSkin, author));
-            });
-            
-            this._elems[componentName] = components
+        if (this._elems[key] === null) {
+            if (isX2) this._elems[key] = new Component(null, paths, sourceSkin, author); 
+            else this._elems[key] = new Component(paths, null, sourceSkin, author);
+            //this._elems[key] = components
         } else {
-            // get the component name erasing the extension of the file.
-            var componentName = f.split('.');
-            componentName.pop();
-            componentName = componentName.join('.');
-
-            this._elems[componentName] = new Component(join(path, file), sourceSkin, author);
+            if (isX2) this._elems[key].pathX2 = paths;
+            else this._elems[key].path = paths;
         }
     }
 
