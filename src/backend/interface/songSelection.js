@@ -22,6 +22,14 @@ class SongSelection extends Base {
         };
     }
 
+    loadModeSelect(dict, path) {
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._modeSelect.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._modeSelect.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        });
+    }
+
     get menuBack() {
         return this._elems['menu-back'];
     }

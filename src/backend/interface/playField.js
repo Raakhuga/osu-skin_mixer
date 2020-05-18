@@ -27,6 +27,54 @@ class PlayField extends Base {
             'section-pass': null
         };
     }
+
+    loadCountDown(dict, path) { 
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._countDown.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._countDown.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        });
+    }
+
+    loadHitBursts(dict, path) { 
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._hitBursts.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._hitBursts.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        });
+    }
+
+    loadInputOverlay(dict, path) { 
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._inputOverlay.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._inputOverlay.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        });
+    }
+
+    loadPauseScreen(dict, path) { 
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._pauseScreen.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._pauseScreen.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        });
+    }
+
+    loadScoreBar(dict, path) { 
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._scoreBar.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._scoreBar.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        });
+    }
+
+    loadScoreNumbers(dict, path) { 
+        let keys = Object.keys(dict);
+        keys.map((key) => {
+            this._scoreNumbers.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
+            this._scoreNumbers.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        });
+    }
     
     get playSkip() {
         return this._elems['play-skip'];

@@ -228,6 +228,14 @@ class Skin {
 
         // Interface files
         this._interface.loadButton(this._buttonFiles, this._path);
+        this._interface.loadCursor(this._cursorFiles, this._path);
+        this._interface.loadModIcon(this._modFiles, this._path);
+        this._interface.loadOffsetWizard(this._offsetWizardFiles, this._path);
+        this._interface.loadPlayField(this._playFieldFiles, this._countDownFiles, this._hitBurstsFiles, this._inputOverlayFiles, this._pauseScreenFiles, this._scoreBarFiles, this._scoreNumbersFiles, this._path); 
+        this._interface.loadRankingGrades(this._rankingGradesFiles, this._path);
+        this._interface.loadRankingScreen(this._rankingScreenFiles, this._path);
+        this._interface.loadScoreEntry(this._scoreEntryFiles, this._path);
+        this._interface.loadSongSelection(this._songSelectionFiles, this._modeSelectFiles, this._path);
     }
 }
 
