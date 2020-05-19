@@ -4,6 +4,7 @@ import './App.css';
 import { channels } from '../shared/constants';
 const { ipcRenderer } = window;
 
+const BeController = require('../backend/beController');
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends React.Component {
       const { appName, appVersion } = arg;
       this.setState({ appName, appVersion });
     });
+    this._beController = new BeController();
   }
 
   render() {

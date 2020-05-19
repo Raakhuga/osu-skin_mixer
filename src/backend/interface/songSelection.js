@@ -24,10 +24,15 @@ class SongSelection extends Base {
 
     loadModeSelect(dict, path) {
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._modeSelect.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._modeSelect.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._modeSelect.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._modeSelect.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
+    }
+
+    save(path) {
+        super.save(path);
+        this._modeSelect.save(path);
     }
 
     get menuBack() {

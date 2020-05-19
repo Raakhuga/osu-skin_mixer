@@ -1,10 +1,13 @@
 const Interface = require('./interface.js');
 const fs = require('fs');
+const { join } = require('path');
 
 class Skin {
-    constructor(path, files) {
+    constructor(path, files, name) {
+        this._name = name;
         this._path = path;
 
+        // Interface Files
         this._buttonFiles = {};
         this._cursorFiles = {};
         this._modFiles = {};
@@ -22,7 +25,10 @@ class Skin {
         this._songSelectionFiles = {};
         this._modeSelectFiles = {};
 
+
+        // Map all the files to its file dictionary
         this._skinFiles = {
+            //Interface
             'button-left': this._buttonFiles, 
             'button-middle': this._buttonFiles, 
             'button-right': this._buttonFiles,
@@ -182,7 +188,7 @@ class Skin {
     fillComponents() {
         let exceptions = ['scoreentry', 'score'];
 
-        this._files.map((file) => {
+        this._files.forEach((file) => {
             // Find key
             // Delete extension
             var aux = file.split('.');
@@ -204,7 +210,7 @@ class Skin {
             if (!isNaN (aux.pop())) {
                 auxKey = aux.join('-');
                 for (var i = 0; i < exceptions.length; i++) {
-                    if (exceptions[i] == auxKey) {
+                    if (exceptions[i] === auxKey) {
                         auxKey = key;
                         break;
                     }
@@ -213,14 +219,24 @@ class Skin {
             key = auxKey;
 
             // Update array
+            /*
+            skinFiles[key] = {
+                'key': {
+                    'x1': [],
+                    'x2': [],
+                    'sourceSkin': string,
+                    'author': string
+                }
+            }
+            */
             if (key in this._skinFiles) {
                 if (key in this._skinFiles[key]) {
                     if (isX2) this._skinFiles[key][key]['x2'].push(file);
                     else this._skinFiles[key][key]['x1'].push(file);
                 }
                 else {
-                    if (isX2) this._skinFiles[key][key] = { 'x1': [], 'x2': [file] }
-                    else this._skinFiles[key][key] = { 'x1': [file], 'x2': [] }
+                    if (isX2) this._skinFiles[key][key] = { 'x1': [], 'x2': [file], 'sourceSkin': this._name, 'author': 'Unknown' }
+                    else this._skinFiles[key][key] = { 'x1': [file], 'x2': [], 'sourceSkin': this._name, 'author': 'Unknown' }
                 }
             } 
                 
@@ -236,6 +252,50 @@ class Skin {
         this._interface.loadRankingScreen(this._rankingScreenFiles, this._path);
         this._interface.loadScoreEntry(this._scoreEntryFiles, this._path);
         this._interface.loadSongSelection(this._songSelectionFiles, this._modeSelectFiles, this._path);
+    }
+
+    loadFromConfig() {
+        var config = {};
+        var configPath = join(this._path, 'config.json');
+
+        if (fs.existsSync()) {
+            try {
+                config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        let keys = Object.keys(config);
+        keys.forEach((key) => {
+            
+            if (key in this._skinFiles) {
+                this._skinFiles[key][key] = { 'x1': config[key]['path'], 'x2': config[key]['pathX2'], 'sourceSkin': this._name, 'author': config[key]['author'] };
+            } 
+            
+        });
+
+        this._interface.loadButton(this._buttonFiles, this._path, this._name);
+        this._interface.loadCursor(this._cursorFiles, this._path, this._name);
+        this._interface.loadModIcon(this._modFiles, this._path, this._name);
+        this._interface.loadOffsetWizard(this._offsetWizardFiles, this._path, this._name);
+        this._interface.loadPlayField(this._playFieldFiles, this._countDownFiles, this._hitBurstsFiles, this._inputOverlayFiles, this._pauseScreenFiles, this._scoreBarFiles, this._scoreNumbersFiles, this._path, this._name); 
+        this._interface.loadRankingGrades(this._rankingGradesFiles, this._path, this._name);
+        this._interface.loadRankingScreen(this._rankingScreenFiles, this._path, this._name);
+        this._interface.loadScoreEntry(this._scoreEntryFiles, this._path, this._name);
+        this._interface.loadSongSelection(this._songSelectionFiles, this._modeSelectFiles, this._path, this._name);
+    }
+
+    saveSkin() {
+        this._interface.saveButton(this._path);
+        this._interface.saveCursor(this._path);
+        this._interface.saveModIcon(this._path);
+        this._interface.saveOffsetWizard(this._path);
+        this._interface.savePlayField(this._path);
+        this._interface.saveRankingGrades(this._path);
+        this._interface.saveRankingScreen(this._path);
+        this._interface.saveScoreEntry(this._path);
+        this._interface.saveSongSelection(this._path);
     }
 }
 

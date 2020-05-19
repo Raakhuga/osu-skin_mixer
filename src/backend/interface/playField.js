@@ -30,50 +30,60 @@ class PlayField extends Base {
 
     loadCountDown(dict, path) { 
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._countDown.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._countDown.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._countDown.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._countDown.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadHitBursts(dict, path) { 
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._hitBursts.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._hitBursts.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._hitBursts.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._hitBursts.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadInputOverlay(dict, path) { 
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._inputOverlay.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._inputOverlay.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._inputOverlay.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._inputOverlay.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadPauseScreen(dict, path) { 
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._pauseScreen.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._pauseScreen.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._pauseScreen.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._pauseScreen.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadScoreBar(dict, path) { 
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._scoreBar.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._scoreBar.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._scoreBar.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._scoreBar.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadScoreNumbers(dict, path) { 
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._scoreNumbers.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._scoreNumbers.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._scoreNumbers.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._scoreNumbers.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
+    }
+
+    save(path) {
+        super.save(path);
+        this._countDown.save(path);
+        this._hitBursts.save(path);
+        this._inputOverlay.save(path);
+        this._pauseScreen.save(path);
+        this._scoreBar.save(path);
+        this._scoreNumbers.save(path);
     }
     
     get playSkip() {

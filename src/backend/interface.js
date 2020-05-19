@@ -13,7 +13,7 @@ class Interface {
         this._button = new Button();
         this._cursor = new Cursor();
         this._modIcon = new ModIcons();
-        this._offsetWizard = new OffsetWizard;
+        this._offsetWizard = new OffsetWizard();
         this._playField = new PlayField();
         this._rankingGrades = new RankingGrades();
         this._rankingScreen = new RankingScreen();
@@ -23,51 +23,53 @@ class Interface {
 
 
     // Expects dictionary of type:
-    /*
+    /* 
     {
         'key': {
             'x1': [],
-            'x2': []
+            'x2': [],
+            'sourceSkin': string,
+            'author': string
         }
     }
     */
     loadButton(dict, path) { 
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._button.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._button.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._button.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._button.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadCursor(dict, path) {
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._cursor.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._cursor.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._cursor.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._cursor.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadModIcon(dict, path) {
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._modIcon.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._modIcon.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._modIcon.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._modIcon.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadOffsetWizard(dict, path) {
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._offsetWizard.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._offsetWizard.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._offsetWizard.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._offsetWizard.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadPlayField(playFieldDict, countDownDict, hitBurstsDict, inputOverlayDict, pauseScreenDict, scoreBarDict, scoreNumbersDict, path) {
         let keys = Object.keys(playFieldDict);
-        keys.map((key) => {
-            this._playField.fillWith(key, playFieldDict[key]['x1'], path, 'SS', 'auth');
-            this._playField.fillWith(key, playFieldDict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._playField.fillWith(key, playFieldDict[key]['x1'], path, playFieldDict[key]['sourceSkin'], playFieldDict[key]['author']);
+            this._playField.fillWith(key, playFieldDict[key]['x2'], path, playFieldDict[key]['sourceSkin'], playFieldDict[key]['author'], true);
         });
         this._playField.loadCountDown(countDownDict, path);
         this._playField.loadHitBursts(hitBurstsDict, path);
@@ -79,35 +81,71 @@ class Interface {
 
     loadRankingGrades(dict, path) {
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._rankingGrades.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._rankingGrades.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._rankingGrades.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._rankingGrades.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadRankingScreen(dict, path) {
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._rankingScreen.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._rankingScreen.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._rankingScreen.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._rankingScreen.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadScoreEntry(dict, path) {
         let keys = Object.keys(dict);
-        keys.map((key) => {
-            this._scoreEntry.fillWith(key, dict[key]['x1'], path, 'SS', 'auth');
-            this._scoreEntry.fillWith(key, dict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._scoreEntry.fillWith(key, dict[key]['x1'], path, dict[key]['sourceSkin'], dict[key]['author']);
+            this._scoreEntry.fillWith(key, dict[key]['x2'], path, dict[key]['sourceSkin'], dict[key]['author'], true);
         });
     }
 
     loadSongSelection(songSelectionDict, modeSelectDict, path) {
         let keys = Object.keys(songSelectionDict);
-        keys.map((key) => {
-            this._songSelection.fillWith(key, songSelectionDict[key]['x1'], path, 'SS', 'auth');
-            this._songSelection.fillWith(key, songSelectionDict[key]['x2'], path, 'SS', 'auth', true);
+        keys.forEach((key) => {
+            this._songSelection.fillWith(key, songSelectionDict[key]['x1'], path, songSelectionDict[key]['sourceSkin'], songSelectionDict[key]['author']);
+            this._songSelection.fillWith(key, songSelectionDict[key]['x2'], path, songSelectionDict[key]['sourceSkin'], songSelectionDict[key]['author'], true);
         });
         this._songSelection.loadModeSelect(modeSelectDict, path);
+    }
+
+    saveButton(path) {
+        this._button.save(path);
+    }
+
+    saveCursor(path) {
+        this._cursor.save(path);
+    }
+
+    saveModIcon(path) {
+        this._modIcon.save(path);
+    }
+
+    saveOffsetWizard(path) {
+        this._offsetWizard.save(path);
+    }
+
+    savePlayField(path) {
+        this._playField.save(path);
+    }
+
+    saveRankingGrades(path) {
+        this._rankingGrades.save(path);
+    }
+
+    saveRankingScreen(path) {
+        this._rankingScreen.save(path);
+    }
+
+    saveScoreEntry(path) {
+        this._scoreEntry.save(path);
+    }
+
+    saveSongSelection(path) {
+        this._songSelection.save(path);
     }
 
 }
